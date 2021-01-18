@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/annis/Desktop/KOD/backend/webshopbackend/webshopbackend.csproj": {}
+  },
+  "projects": {
+    "/Users/annis/Desktop/KOD/backend/webshopbackend/webshopbackend.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/annis/Desktop/KOD/backend/webshopbackend/webshopbackend.csproj",
+        "projectName": "webshopbackend",
+        "projectPath": "/Users/annis/Desktop/KOD/backend/webshopbackend/webshopbackend.csproj",
+        "packagesPath": "/Users/annis/.nuget/packages/",
+        "outputPath": "/Users/annis/Desktop/KOD/backend/webshopbackend/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/annis/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "automapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
+            "microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
