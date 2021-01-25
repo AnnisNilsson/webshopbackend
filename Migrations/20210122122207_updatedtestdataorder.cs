@@ -2,7 +2,7 @@
 
 namespace webshopbackend.Migrations
 {
-    public partial class uppdatedNames : Migration
+    public partial class updatedtestdataorder : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

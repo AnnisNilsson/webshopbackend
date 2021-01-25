@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace webshopbackend.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20210118092054_uppdatedNames")]
-    partial class uppdatedNames
+    [Migration("20210122102515_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,15 @@ namespace webshopbackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 12,
+                            Adress = "Coola vägen",
+                            City = "Västerås",
+                            Name = "Kund"
+                        });
                 });
 
             modelBuilder.Entity("Order", b =>
@@ -46,21 +55,15 @@ namespace webshopbackend.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("CustomerId1")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("TotalPrice")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("orderRows")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId1");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -107,7 +110,9 @@ namespace webshopbackend.Migrations
                 {
                     b.HasOne("Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId1");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
                 });

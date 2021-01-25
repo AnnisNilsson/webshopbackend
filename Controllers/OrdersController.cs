@@ -51,7 +51,7 @@ namespace webshopbackend.Controllers
             int CustId = await CreateCustomer(newOrderDTO.CustomerDTO);
             Order newOrder = _mapper.Map<Order>(newOrderDTO);
             newOrder.Created = DateTime.Now;
-            newOrder.CustomerId = CustId.ToString();
+            newOrder.CustomerId = CustId;
             _context.Orders.Add(newOrder);
             await _context.SaveChangesAsync();
 
@@ -62,23 +62,14 @@ namespace webshopbackend.Controllers
         {
             Customer newCustomer = new Customer()
             {
-                Name = newCustomerDTO.Name
+                Name = newCustomerDTO.Name,
+                Adress = newCustomerDTO.Adress,
+                City = newCustomerDTO.City
             };
             _context.Customers.Add(newCustomer);
             await _context.SaveChangesAsync();
             return newCustomer.Id;
         }
-        //ny
-        // [HttpPost]
-        //  public async Task<ActionResult> CreateCustomer(CustomerDTO newCustomerDTO) {
-        //      Customer newCustomer = _mapper.Map<Customer>(newCustomerDTO);
-
-        //     _context.Customers.Add(newCustomer);
-        // await _context.SaveChangesAsync();
-
-        //     return CreatedAtAction("CreateCustomer", newCustomer);
-        // }
-        //ny slut
     }
 }
 

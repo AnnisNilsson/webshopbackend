@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace webshopbackend.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20210114083410_orderrow")]
-    partial class orderrow
+    [Migration("20210122110841_productData6")]
+    partial class productData6
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,15 @@ namespace webshopbackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 12,
+                            Adress = "Coola vägen",
+                            City = "Västerås",
+                            Name = "Kund"
+                        });
                 });
 
             modelBuilder.Entity("Order", b =>
@@ -46,16 +55,15 @@ namespace webshopbackend.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("TotalPrice")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("orderRows")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -96,6 +104,67 @@ namespace webshopbackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Ett träd i skogen",
+                            Image = "https://images.pexels.com/photos/142497/pexels-photo-142497.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+                            Price = 400,
+                            Title = "Skogs Träd"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Ett träd i en dimmig skogen",
+                            Image = "https://images.pexels.com/photos/173388/pexels-photo-173388.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+                            Price = 500,
+                            Title = "Dim Träd"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Ett träd i en solig skogen",
+                            Image = "https://images.pexels.com/photos/1563604/pexels-photo-1563604.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+                            Price = 650,
+                            Title = "Sol Träd"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Ett träd i en rak skogen",
+                            Image = "https://images.pexels.com/photos/1414535/pexels-photo-1414535.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+                            Price = 440,
+                            Title = "Raka Träd"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Ett träd rött träd",
+                            Image = "https://images.pexels.com/photos/1547813/pexels-photo-1547813.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+                            Price = 550,
+                            Title = "Röda Träd"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Ett väg träd",
+                            Image = "https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+                            Price = 250,
+                            Title = "Väg Träd"
+                        });
+                });
+
+            modelBuilder.Entity("Order", b =>
+                {
+                    b.HasOne("Customer", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("OrderRow", b =>
@@ -115,6 +184,11 @@ namespace webshopbackend.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Customer", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Order", b =>

@@ -8,7 +8,7 @@ public class Order {
     
    public ICollection<OrderRow> OrderRows{ get; set; }  
 
-    public string CustomerId {get; set; }
+    public int CustomerId {get; set; }
    public Customer Customer  {get; set; }
 
 }

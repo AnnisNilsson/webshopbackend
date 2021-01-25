@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace webshopbackend.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20210115095130_addedautomappertoProduct")]
-    partial class addedautomappertoProduct
+    [Migration("20210122103716_productData")]
+    partial class productData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,15 @@ namespace webshopbackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 12,
+                            Adress = "Coola vägen",
+                            City = "Västerås",
+                            Name = "Kund"
+                        });
                 });
 
             modelBuilder.Entity("Order", b =>
@@ -46,21 +55,15 @@ namespace webshopbackend.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("CustomerId1")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("TotalPrice")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("orderRows")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId1");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -86,9 +89,6 @@ namespace webshopbackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
@@ -104,13 +104,25 @@ namespace webshopbackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Ett träd i skogen",
+                            Image = "https://images.pexels.com/photos/142497/pexels-photo-142497.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+                            Price = 400,
+                            Title = "Skogs Träd"
+                        });
                 });
 
             modelBuilder.Entity("Order", b =>
                 {
                     b.HasOne("Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId1");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
                 });
