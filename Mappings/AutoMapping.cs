@@ -6,8 +6,8 @@ public class AutoMapping : Profile {
         CreateMap<Product, ProductDTO>();
         CreateMap<ProductDTO, Product>();
 
-        CreateMap<OrderRow, OrderDTO>();
-        CreateMap<OrderDTO, OrderRow>();
+        CreateMap<OrderRow, OrderRowDTO>();
+        CreateMap<OrderRowDTO, OrderRow>();
 
         CreateMap<Customer, CustomerDTO>();
         CreateMap<CustomerDTO, Customer>();

@@ -16,6 +16,7 @@ namespace webshopbackend
 {
     public class Startup
     {
+        private string corsPolicyName = "CorsConfigPolicy";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,7 +27,7 @@ namespace webshopbackend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //ändrade för att få ProductContext att funka
+            //få ProductContext att funka och starrta upp
             services.AddDbContext<ProductContext>();
             services.AddControllers();
             //lägger till automapper i start up
@@ -37,6 +38,18 @@ namespace webshopbackend
             IMapper mapper = config.CreateMapper();
 
             services.AddSingleton(mapper);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(corsPolicyName,
+                    builder =>
+                    {
+                        builder
+                            .WithOrigins("https://localhost:3001", "http://localhost:3000")
+                            .WithMethods("*");
+                    });
+            });
+
 
             services.AddControllers();
         }
@@ -52,6 +65,8 @@ namespace webshopbackend
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(corsPolicyName);
 
             app.UseAuthorization();
 

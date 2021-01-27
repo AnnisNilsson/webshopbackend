@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace webshopbackend.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20210122123903_customer2")]
-    partial class customer2
+    [Migration("20210127140244_updatteOrder")]
+    partial class updatteOrder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,6 +110,11 @@ namespace webshopbackend.Migrations
                         {
                             OrderId = 2,
                             ProductId = 1
+                        },
+                        new
+                        {
+                            OrderId = 2,
+                            ProductId = 2
                         });
                 });
 

@@ -9,14 +9,14 @@ namespace webshopbackend.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CustomersController : ControllerBase
+    public class CustomerController : ControllerBase
     {
         private readonly ProductContext _context;
         private readonly IMapper _mapper;
 
         private List<Customer> customers = new List<Customer>();
 
-        public CustomersController(ProductContext context, IMapper mapper){
+        public CustomerController(ProductContext context, IMapper mapper){
             _context = context;
             _mapper = mapper;
         }
@@ -49,4 +49,3 @@ namespace webshopbackend.Controllers
         }
     }
 }
- 

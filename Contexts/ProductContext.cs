@@ -18,28 +18,28 @@ public class ProductContext : DbContext{
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<OrderRow>()
-            .HasKey(or => new { or.OrderId, or.ProductId });
-            modelBuilder.Entity<OrderRow>()
-            .HasOne(or => or.Product)
-            .WithMany(p => p.OrderRows)
-            .HasForeignKey(p => p.ProductId);
-            modelBuilder.Entity<OrderRow>()
-            .HasOne(or => or.Order)
-            .WithMany(o => o.OrderRows)
-            .HasForeignKey(o => o.OrderId);
-            modelBuilder.Entity<OrderRow>()
-            .HasKey(or => new { or.OrderId, or.ProductId });
-            modelBuilder.Entity<Order>()
-            .HasOne(o=> o.Customer)
-            .WithMany(c=> c.Orders);
-//customer
+        modelBuilder.Entity<OrderRow>()
+        .HasKey(or => new { or.OrderId, or.ProductId });
+        modelBuilder.Entity<OrderRow>()
+        //.HasForeignKey(p => p.ProductId)
+        .HasOne(or => or.Product)
+        .WithMany(p => p.OrderRows);
+        modelBuilder.Entity<OrderRow>()
+        .HasOne(or => or.Order)
+        .WithMany(o => o.OrderRows);
+        //.HasForeignKey(o => o.OrderId);
+        modelBuilder.Entity<OrderRow>()
+        .HasKey(or => new { or.OrderId, or.ProductId });
+        modelBuilder.Entity<Order>()
+        .HasOne(o=> o.Customer)
+        .WithMany(c=> c.Orders);
+        //customer
         Customer c = new Customer {Id = 12, Name = "Kund", Adress = "Coola vägen", City = "Västerås" };
         modelBuilder.Entity<Customer>().HasData(c);
 
         Customer c2 = new Customer {Id = 1, Name = "Klas", Adress = "En vägen", City = "Borås" };
         modelBuilder.Entity<Customer>().HasData(c2);
-//product
+        //product
         Product p = new Product {Id = 1, Price = 400, Title = "Skogs Träd", Description = "Ett träd i skogen", Image = "https://images.pexels.com/photos/142497/pexels-photo-142497.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"};
         modelBuilder.Entity<Product>().HasData(p);
 

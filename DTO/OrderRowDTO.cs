@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Generic;
+
 public class OrderRowDTO{
     
     public int OrderId { get; set; }
-    public Order Order { get; set; }
+    public OrderDTO OrderDTO { get; set; }
     public int ProductId { get; set; }
-    public Product Product { get; set; }
+    public ProductDTO ProductDTO { get; set; }
 }

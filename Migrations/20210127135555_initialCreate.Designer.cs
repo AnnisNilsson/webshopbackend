@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace webshopbackend.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20210122123444_AddOrderRowData")]
-    partial class AddOrderRowData
+    [Migration("20210127135555_initialCreate")]
+    partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,13 @@ namespace webshopbackend.Migrations
                             Adress = "Coola vägen",
                             City = "Västerås",
                             Name = "Kund"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Adress = "En vägen",
+                            City = "Borås",
+                            Name = "Klas"
                         });
                 });
 
@@ -103,6 +110,11 @@ namespace webshopbackend.Migrations
                         {
                             OrderId = 2,
                             ProductId = 1
+                        },
+                        new
+                        {
+                            OrderId = 2,
+                            ProductId = 2
                         });
                 });
 

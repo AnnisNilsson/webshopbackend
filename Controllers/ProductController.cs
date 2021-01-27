@@ -11,43 +11,41 @@ namespace webshopbackend.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ProductsController : ControllerBase
+    public class ProductController : ControllerBase
     {
         private readonly ProductContext _context;
         private readonly IMapper _mapper;
 
         private List<Product> products = new List<Product>();
 
-        public ProductsController(ProductContext context, IMapper mapper)
+        public ProductController(ProductContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetProducts()
-        {
-            List<Product> products = await _context.Products.Include(p => p.OrderRows).ToListAsync();
+[HttpGet]
+        public async Task<ActionResult> GetProducts() {
+            List<Product> products = await _context.Products.ToListAsync();
+            List<ProductDTO> productDTOs = _mapper.Map<List<ProductDTO>>(products);
 
-            List<ProductDTO> ProductDTOs = _mapper.Map<List<ProductDTO>>(products);
-            return Ok(ProductDTOs);
-
+            return Ok(productDTOs);
         }
+
         [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult> GetById(int id)
         {
             Product found = await _context.Products.FindAsync(id);
 
-            if (found == null)
-            {
+            if(found == null) {
                 return NotFound();
             }
+
             return Ok(_mapper.Map<ProductDTO>(found));
         }
 
         [HttpPost]
-
         public async Task<ActionResult> CreateProduct(ProductDTO newProductDTO)
         {
             Product newProduct = _mapper.Map<Product>(newProductDTO);
@@ -56,6 +54,5 @@ namespace webshopbackend.Controllers
 
             return CreatedAtAction("CreateProduct", newProduct);
         }
-
     }
 }
