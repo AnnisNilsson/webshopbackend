@@ -54,6 +54,7 @@ namespace webshopbackend.Controllers
         public async Task<ActionResult> CreateOrder(OrderDTO newOrderDTO)
         {
             Customer cust = await CreateCustomer(newOrderDTO.CustomerDTO);
+            //anropar customer metod
             CustomerDTO custD = _mapper.Map<CustomerDTO>(cust);
            
             Order newOrder = _mapper.Map<Order>(newOrderDTO);
