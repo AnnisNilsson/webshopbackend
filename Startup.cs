@@ -30,6 +30,7 @@ namespace webshopbackend
             //få ProductContext att funka och starrta upp
             services.AddDbContext<ProductContext>();
             services.AddControllers();
+            
             //lägger till automapper i start up
             MapperConfiguration config = new MapperConfiguration(mc => {
                 mc.AddProfile(new AutoMapping());
@@ -46,7 +47,8 @@ namespace webshopbackend
                     {
                         builder
                             .WithOrigins("https://localhost:3001", "http://localhost:3000")
-                            .WithMethods("*");
+                            .WithMethods("*")
+                             .AllowAnyHeader();
                     });
             });
 

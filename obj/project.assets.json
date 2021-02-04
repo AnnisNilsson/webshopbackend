@@ -1242,11 +1242,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/annis/Desktop/KOD/backend/webshopbackend/webshopbackend.csproj",
+      "projectUniqueName": "/Users/annis/Desktop/KOD/backend/webshopbackend 2.0/webshopbackend.csproj",
       "projectName": "webshopbackend",
-      "projectPath": "/Users/annis/Desktop/KOD/backend/webshopbackend/webshopbackend.csproj",
+      "projectPath": "/Users/annis/Desktop/KOD/backend/webshopbackend 2.0/webshopbackend.csproj",
       "packagesPath": "/Users/annis/.nuget/packages/",
-      "outputPath": "/Users/annis/Desktop/KOD/backend/webshopbackend/obj/",
+      "outputPath": "/Users/annis/Desktop/KOD/backend/webshopbackend 2.0/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/annis/.nuget/NuGet/NuGet.Config"

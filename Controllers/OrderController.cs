@@ -53,47 +53,74 @@ namespace webshopbackend.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateOrder(OrderDTO newOrderDTO)
         {
+            //anropar customer metod, den som skapar en ny kund
             Customer cust = await CreateCustomer(newOrderDTO.CustomerDTO);
-            //anropar customer metod
+            //hämtar in objektet från createCustomer
             CustomerDTO custD = _mapper.Map<CustomerDTO>(cust);
-           
+            //automappar objekten newOrderDto -> newOrdet 
             Order newOrder = _mapper.Map<Order>(newOrderDTO);
+            //Hämtar det nuvarande datumet och tiden när orden skapas
             newOrder.Created = DateTime.Now;
+            //lägger till Id från cust i newOrders CustomerId.
             newOrder.CustomerId = cust.Id;
+            //gör en ny lista i newOrder med propertyn Orderrows
             newOrder.OrderRows = new List<OrderRow>();
-           
-
+            
+            //sparar ner new order och lägger till i databasen
             _context.Orders.Add(newOrder);
             await _context.SaveChangesAsync();
 
-        OrderDTO newOrderD = _mapper.Map<OrderDTO>(newOrder);
-        newOrderD.CustomerDTO = custD;
+
+         
+        //gör det till en lista med orderrows och skickar in orderId
             List<OrderRow> or = await CreateOrderRow(newOrderDTO.OrderRows, newOrder.Id);
+            //mappar listan till orderRowD
             List<OrderRowDTO> orderRowD = _mapper.Map<List<OrderRowDTO>>(or);
-            newOrderD.OrderRows = orderRowD;
+
+            //***total price
+            int totalPrice = 0;
+            foreach (OrderRow orderrow in newOrder.OrderRows) {
+            int price  = (await _context.Products.FirstAsync(p => p.Id == orderrow.ProductId)).Price;
+            totalPrice = totalPrice + price;
+            }
+            //uppdaterar total price
+             newOrder.TotalPrice = totalPrice;
+
+       //mappar objektet newOrder till newOrderD
+        OrderDTO newOrderD = _mapper.Map<OrderDTO>(newOrder);
+            
+            // sparar ner totalPrice
+            await _context.SaveChangesAsync();
+
+            //returnerar newOrderD
             return CreatedAtAction("CreateOrder", newOrderD);
         }
 
         public async Task<List<OrderRow>>CreateOrderRow(ICollection<OrderRowDTO> newOrderRowDTO, int OrderId)
         {
+            //gör en lista med datatypen OrderRow
             List<OrderRow> newlyCreatedOrderRows = new List<OrderRow>();
             {
+            //loopar igenom listan med objekt av datatypen OrderRowDTO i newOrderRowDTO
                 foreach(OrderRowDTO orDto in newOrderRowDTO){
+                    //skapar en ny orderrow
                     OrderRow newOrderRow = new OrderRow()
                     {
+                    //lägger till OrderId propertyn i OrderRow
                     OrderId = OrderId,
+                    //lägger till ProductId av produkter som laggts in
                     ProductId = orDto.ProductId
                 };
-
+             //sparar ner neworderRow och lägger till i databasen
             _context.OrderRows.Add(newOrderRow);
             await _context.SaveChangesAsync();
+            // i listan newlyCreatedOrderRows läggs newOrderRow till
             newlyCreatedOrderRows.Add(newOrderRow);
         } 
+        //returnerar newlyCreatedOrderRows
             return newlyCreatedOrderRows;
         }
         }
-        //änding slut
-
         public async Task<Customer>CreateCustomer(CustomerDTO newCustomerDTO)
         {
             Customer newCustomer = new Customer()

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vo1Tu75nbNk1onJyKEX/JZFhj7qx2RBLkGd+2lMi/80t+j/UXJFNiiu4/QF6JexUQgfs8pv4abxC5MpOXszdbw==",
+  "dgSpecHash": "EHC19XNlB900qF5JXbldcB5cF8TQN3sonxYlQVGv+gVF/3RDj/jCmNerfTqRkdXa1jAANlWeGz/S1XKod2UBuw==",
   "success": true,
-  "projectFilePath": "/Users/annis/Desktop/KOD/backend/webshopbackend/webshopbackend.csproj",
+  "projectFilePath": "/Users/annis/Desktop/KOD/backend/webshopbackend 2.0/webshopbackend.csproj",
   "expectedPackageFiles": [
     "/Users/annis/.nuget/packages/automapper/10.1.1/automapper.10.1.1.nupkg.sha512",
     "/Users/annis/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
