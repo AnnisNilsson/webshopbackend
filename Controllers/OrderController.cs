@@ -54,7 +54,7 @@ namespace webshopbackend.Controllers
         public async Task<ActionResult> CreateOrder(OrderDTO newOrderDTO)
         {
             //anropar customer metod, den som skapar en ny kund
-            Customer cust = await CreateCustomer(newOrderDTO.CustomerDTO);
+            Customer cust = await CreateCustomer(newOrderDTO.Customer);
             //hämtar in objektet från createCustomer
             CustomerDTO custD = _mapper.Map<CustomerDTO>(cust);
             //automappar objekten newOrderDto -> newOrdet 
@@ -96,7 +96,7 @@ namespace webshopbackend.Controllers
             return CreatedAtAction("CreateOrder", newOrderD);
         }
 
-        public async Task<List<OrderRow>>CreateOrderRow(ICollection<OrderRowDTO> newOrderRowDTO, int OrderId)
+        private async Task<List<OrderRow>>CreateOrderRow(ICollection<OrderRowDTO> newOrderRowDTO, int OrderId)
         {
             //gör en lista med datatypen OrderRow
             List<OrderRow> newlyCreatedOrderRows = new List<OrderRow>();
@@ -121,7 +121,7 @@ namespace webshopbackend.Controllers
             return newlyCreatedOrderRows;
         }
         }
-        public async Task<Customer>CreateCustomer(CustomerDTO newCustomerDTO)
+        private async Task<Customer>CreateCustomer(CustomerDTO newCustomerDTO)
         {
             Customer newCustomer = new Customer()
             {

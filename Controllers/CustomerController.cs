@@ -37,15 +37,5 @@ namespace webshopbackend.Controllers
             }
             return Ok(_mapper.Map<CustomerDTO>(found));
         }
-        [HttpPost]
-
-         public async Task<ActionResult> CreateCustomer(CustomerDTO newCustomerDTO) {
-             Customer newCustomer = _mapper.Map<Customer>(newCustomerDTO);
-
-            _context.Customers.Add(newCustomer);
-        await _context.SaveChangesAsync();
-
-            return CreatedAtAction("CreateCustomer", newCustomer);
-        }
     }
 }
